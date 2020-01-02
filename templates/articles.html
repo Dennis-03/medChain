@@ -1,0 +1,45 @@
+{% extends 'layout.html' %} {% block body %}
+<h1>Prescriptions</h1>
+<form class="form-inline mr-auto" method="POST">
+  <input
+    class="form-control mr-sm-2"
+    type="text"
+    name="text"
+    placeholder="Search"
+    aria-label="Search"
+  />
+  <button class="btn btn-danger" type="submit">
+    Search
+  </button>
+</form>
+<hr />
+<ul class="list-group">
+  {% for article in articles %} {% if article.title==search_query %}
+  <li class="list-group-item">
+    <a href="article/{{ article.id }}"
+      >{{ article.title }}
+      <a>
+        {% if article.issue == None %}
+        <span
+          style="float: right; pointer-events: none;color: forestgreen"
+          class="glyphicon glyphicon-remove-sign"
+        ></span>
+        {% else %}
+        <span
+          style="float: right; pointer-events: none; color: tomato "
+          class="	glyphicon glyphicon-ok-sign"
+        ></span>
+        {% endif %}
+      </a></a
+    >
+  </li>
+  {% endif %} {% endfor %}
+  <hr />
+  {% for article in articles %}
+
+  <li class="list-group-item">
+    <a href="article/{{ article.id }}">{{ article.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

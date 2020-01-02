@@ -1,0 +1,47 @@
+{% extends 'layout.html' %} {% block body %}
+<h1>
+  Prescribed
+  <small style="color: honeydew"> By {{ session.username }}</small>
+</h1>
+<a class="btn btn-success" href="/add_article"> Add Prescription</a>
+
+<table class="table" style="margin-top: 20px">
+  <tr bgcolor="white" style="color:dimgrey">
+    <th>ID</th>
+    <th>Patient ID</th>
+    <th>Doctor ID</th>
+    <th>Date</th>
+    <th></th>
+    <th></th>
+  </tr>
+  {% for article in articles %}
+  <tr>
+    <td>{{ article.id }}</td>
+    <td>{{ article.title }}</td>
+    <td>{{ article.author }}</td>
+    <td>{{ article.create_date }}</td>
+    <td>
+      <a
+        style="display: none"
+        href="edit_article/{{ article.id }}"
+        class="btn btn-default pull-right"
+        >Edit</a
+      >
+    </td>
+    <td>
+      <form
+        style="display: none"
+        action="{{url_for('delete_article', id=article.id)}}"
+        method="post"
+      >
+        <input type="hidden" name="_method" value="DELETE" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<hr style="margin-top: 0% " />
+
+{% endblock %}
